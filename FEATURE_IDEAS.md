@@ -17,19 +17,23 @@ most important ranking and data-management needs first.
   or 150-point window.
 - [ ] Track strength of schedule so a movie cannot climb mainly through weak opponents.
 - [ ] Add a temporary `re-evaluate` mode for movies whose rank feels stale.
-- [ ] Record matchup history and show why a movie's Elo changed.
+- [ ] Persist one compact matchup event per vote: movie, opponent, result, Elo before/after, rank before/after, and timestamp. Do not store a full leaderboard snapshot after every vote.
 - [ ] Compare a movie directly against its nearest neighbors on demand.
 
 ## Leaderboard Tools
 
 - [ ] Search the leaderboard and jump directly to a movie.
 - [ ] Filter by calibrated, uncalibrated, recently added, or a rating range.
-- [ ] Sort by rank, Elo, win percentage, placement progress, or date added.
-- [ ] Show rank movement since the previous session.
+- [ ] Sort by win percentage, placement progress, date added, or recent activity.
+  Rank and Elo are the same ordering, so they should not be separate sort modes.
+- [ ] Show persistent rank movement over a chosen time or matchup range; do not frame the product around sessions.
 - [ ] Reset one movie to 1000 Elo and `0 / 3` placement matches.
 - [ ] Remove a movie with a confirmation dialog and an option to preserve its matchup
   history in an archive.
 - [ ] Add a details view with poster, rating graph, wins, losses, and comparison log.
+- [ ] Movie history view: list every matchup, its opponent, result, Elo change, and
+  the rating immediately after that vote.
+- [ ] Interactive Elo-over-time graph for one or several selected movies. Hovering a point should reveal the opponent, outcome, Elo delta, rank delta, and timestamp.
 - [ ] Pin favorites or create custom watchlist tags.
 
 ## Discovery And Bulk Add
@@ -73,9 +77,34 @@ most important ranking and data-management needs first.
 - [ ] Lightweight animations and better loading states for poster downloads.
 - [ ] Accessibility pass: high contrast, scalable text, keyboard navigation, and
   screen-reader labels.
-- [ ] animation where both movie flip around, then reveal their current position and elo, then you see the winning movie's elo turn green if it moves up, with a green up arrow, and the points smoothly increase, the losing movie's points turn red and decrease, and the rank slides up or down as well, or stays the same (depending on where it moves to of course). this should be quick, or even literally on the side, so the next matchup can get there right away. users will hate having to wait even 500ms if they dont have to. Maybe there is a side panel that shows the animation / update from the previous match?
-- [ ] big ui upgrade to be smoother and modern, more pretty, good colors / light effects / diffused gradient stuff, less tkinter gui vibes. (maybe this needs the web upgrade, or a stronger engine)
+- [ ] Non-blocking result panel: after a vote, animate only the changed Elo and rank in a compact side panel while the next matchup is already ready to click. It may use color, arrows, and a short count-up, but must never add an artificial wait.
+- [ ] Modern arena redesign: establish a polished visual system, faster transitions, strong poster presentation, restrained light effects, and clear hierarchy. Evaluate a web UI when the interaction and animation needs outgrow CustomTkinter.
 
+
+## Matchmaking Philosophy
+
+- [ ] Replace hidden middle weighting with an explicit exposure policy. Default toward near-uniform sampling after calibration, then use uncertainty and nearby Elo to choose high-information matchups.
+- [ ] Optionally add a mild top-half bias only if data shows the highest ranks are under-tested; expose the rationale and coverage metrics.
+- [ ] Preserve the smooth global order: a direct winner should not be automatically forced above the direct loser. A head-to-head upset is strong evidence, especially for a new movie, but it should be balanced against the rest of both movies' records.
+- [ ] Let a surprising recent preference accelerate a movie's re-evaluation by scheduling several nearby high-information opponents, rather than imposing a brittle one-match rank override.
+- [ ] Show matchup coverage and opponent diversity so the user can see whether a movie's rating rests on broad evidence or a narrow set of repeated rivals.
+
+## Personal, Shared, And Global Rankings
+
+- [ ] Keep every personal leaderboard private and internally consistent; global ranking must be a separate aggregate, never a replacement for someone's taste.
+- [ ] Aggregate pairwise preferences, not raw win/loss totals. A repeated Odyssey-versus-Interstellar vote from one small ten-movie roster must have sharply diminishing weight.
+- [ ] Count each user-pair relationship with a cap or decay, then normalize a user's total contribution so large and small personal rosters have fair influence.
+- [ ] Use the overlap between users' movie lists to connect preference communities, and report uncertainty when a title lacks comparisons across different audiences.
+- [ ] Separate stable consensus from niche preference: support global, community, genre, and friend-group views rather than pretending there is one unquestionable ranking.
+- [ ] Store immutable matchup events and version every aggregate algorithm. Ranking patches should recompute derived scores without discarding the original preferences.
+- [ ] Add authentication, rate limits, anti-bot controls, and repeat-vote rules before any public aggregate is trusted.
+
+## Platform And Metadata Strategy
+
+- [ ] Treat TMDB as a development-time metadata provider, not an assumed commercial asset source. Review its current terms and image attribution/licensing before any public or commercial launch.
+- [ ] Put movie metadata and poster retrieval behind a provider adapter so the application is not structurally tied to TMDB.
+- [ ] Research licensed, open, public-domain, user-supplied, and paid artwork options; avoid bulk scraping or mirroring a third-party poster catalog.
+- [ ] Define a first-class stable item model now: local item ID, external provider IDs, title, year, and media provenance. It can later support movies, books, games, music, and other pairwise-ranked domains.
 ## Social And Fun
 
 - [ ] Share a read-only ranking page or export a polished image of the top 10.
