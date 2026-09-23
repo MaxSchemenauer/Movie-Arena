@@ -73,6 +73,8 @@ most important ranking and data-management needs first.
 - [ ] Lightweight animations and better loading states for poster downloads.
 - [ ] Accessibility pass: high contrast, scalable text, keyboard navigation, and
   screen-reader labels.
+- [ ] animation where both movie flip around, then reveal their current position and elo, then you see the winning movie's elo turn green if it moves up, with a green up arrow, and the points smoothly increase, the losing movie's points turn red and decrease, and the rank slides up or down as well, or stays the same (depending on where it moves to of course). this should be quick, or even literally on the side, so the next matchup can get there right away. users will hate having to wait even 500ms if they dont have to. Maybe there is a side panel that shows the animation / update from the previous match?
+- [ ] big ui upgrade to be smoother and modern, more pretty, good colors / light effects / diffused gradient stuff, less tkinter gui vibes. (maybe this needs the web upgrade, or a stronger engine)
 
 ## Social And Fun
 
