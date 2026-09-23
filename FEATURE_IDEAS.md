@@ -47,13 +47,61 @@ repetitive or forcing a brittle one-match rank override.
   consecutive wins.
 - Give a rising movie a temporary upward challenge path and a falling movie a
   temporary downward challenge path.
-- Selectively widen its opponent window toward stronger or weaker opponents.
+- Selectively widen and shift its opponent window in the correct direction: a rising
+  movie gets mostly-higher challenges, while a falling movie gets mostly-lower ones.
+### Historical Schedule Re-evaluation
+
+**Goal:** Correct the opportunity to prove a movie's placement when early pairings turn
+out, in retrospect, to have been unusually easy or unusually hard, without granting
+free Elo or making permanent complexity out of a warm-up problem.
+
+- Periodically estimate a movie's retrospective strength of schedule after later
+  results make its past opponents more informative.
+- Compare its historical opponents' current or stabilized strength with the strength
+  normally faced by movies at a similar current rank and evidence level.
+- Detect both possible placement-luck patterns: a strong movie initially brutalized by
+  eventual top favorites, and a high-ranked movie built mostly against eventual weaker
+  opponents.
+- Discount the signal when few comparisons exist and taper it as broad, diverse
+  evidence accumulates; ordinary long-run matchmaking should increasingly be fair on
+  its own.
+- Use the signal to schedule targeted, high-information re-evaluation matchups in the
+  direction that tests the suspicious placement, rather than changing Elo
+  retrospectively.
+- For example, a movie that later proves to have lost only to the user's top three can
+  receive stronger-than-its-current-rank challenges and earn a rapid recovery by
+  winning them.
+- Combine historical schedule luck with momentum, rewatch-driven preference changes,
+  new-entry calibration, confidence, cooldowns, and opponent diversity, while keeping
+  the total policy deliberately small and explainable.
+- Use simulations to verify that this intervention improves recovery and does not
+  create persistent bias, over-scheduling, or a system that cannot eventually settle.
 - Add cooldowns, opponent diversity, and short-window repeat limits so the same movie
   does not appear too often.
 - Slightly increase momentum-match likelihood without starving the rest of the roster.
 - Fade the boost when outcomes become ordinary and the movie re-settles.
 - Show in the movie detail view that a rating is moving quickly because recent
   preferences conflict with its established position.
+
+### Rating-Engine Stability And Simulation
+
+**Goal:** Tune rating changes and matchmaking from measurable behavior rather than
+guessing at Elo windows, K-factors, or a preferred rating distribution.
+
+- Keep ordinary Elo point changes dependent on the Elo gap, not ordinal rank: expected
+  wins produce small changes and upsets produce larger ones.
+- Use one shared, pairwise K-factor for both participants so a simple Elo matchup is
+  zero-sum even when the movies have different amounts of prior evidence.
+- Evaluate whether new or uncertain movies need a temporary higher shared K-factor,
+  while avoiding unexplained rating-pool inflation or deflation.
+- Treat the eventual Elo spread as an observed property of the user's preferences and
+  comparison graph, not a fixed target or an artificially enforced distribution.
+- Build a deterministic simulation harness that runs the real matchmaker through
+  100, 1,000, 2,000, and 3,000 synthetic votes.
+- Test smooth transitive preferences, a favorites-heavy pool with a long high-quality
+  tail, intransitive preferences, changed opinions after a rewatch, and late additions.
+- Measure coverage fairness, Elo spread, top-rank recovery, rank stability, calibration
+  speed, and the ability of a genuinely misplaced movie to re-settle.
 
 ### Smooth Head-to-Head Policy
 

@@ -1,0 +1,110 @@
+id,title,release_year,tmdb_id,elo_rating,matches_played,wins,losses,poster_local_path
+0001-the-odyssey,The Odyssey,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\Movie Arena\posters\0001-the-odyssey.jpg
+0002-oppenheimer,Oppenheimer,,,1001.15,2,1,1,C:\Users\Maxsc\VS_projects\Movie Arena\posters\0002-oppenheimer.jpg
+0003-the-martian,The Martian,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0003-the-martian.jpg
+0004-interstellar,Interstellar,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0004-interstellar.jpg
+0005-knives-out,Knives Out,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\random\posters\0005-knives-out.jpg
+0006-glass-onion-a-knives-out-mystery,Glass Onion: A Knives Out Mystery,,,1021.15,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0006-glass-onion-a-knives-out-mystery.jpg
+0007-the-dark-knight-rises,The Dark Knight Rises,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0007-the-dark-knight-rises.jpg
+0008-batman-begins,Batman Begins,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0008-batman-begins.jpg
+0009-the-dark-knight,The Dark Knight,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0009-the-dark-knight.jpg
+0010-star-wars-episode-iii-revenge-of-the-sith,Star Wars: Episode III - Revenge of the Sith,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0010-star-wars-episode-iii-revenge-of-the-sith.jpg
+0011-star-wars-episode-ii-attack-of-the-clones,Star Wars: Episode II - Attack of the Clones,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\random\posters\0011-star-wars-episode-ii-attack-of-the-clones.jpg
+0012-the-accountant,The Accountant,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\random\posters\0012-the-accountant.jpg
+0013-fantastic-mr-fox,Fantastic Mr. Fox,,,1018.85,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0013-fantastic-mr-fox.jpg
+0014-sinners,Sinners,,,1057.65,3,3,0,C:\Users\Maxsc\VS_projects\random\posters\0014-sinners.jpg
+0015-star-wars-episode-i-the-phantom-menace,Star Wars: Episode I - The Phantom Menace,,,980.07,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0015-star-wars-episode-i-the-phantom-menace.jpg
+0016-star-wars-episode-iv-a-new-hope,Star Wars: Episode IV - A New Hope,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\random\posters\0016-star-wars-episode-iv-a-new-hope.jpg
+0017-star-wars-episode-v-the-empire-strikes-back,Star Wars: Episode V - The Empire Strikes Back,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0017-star-wars-episode-v-the-empire-strikes-back.jpg
+0018-star-wars-episode-vi-return-of-the-jedi,Star Wars: Episode VI - Return of the Jedi,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0018-star-wars-episode-vi-return-of-the-jedi.jpg
+0019-the-imitation-game,The Imitation Game,,,1073.39,4,4,0,C:\Users\Maxsc\VS_projects\random\posters\0019-the-imitation-game.jpg
+0020-gladiator,Gladiator,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0020-gladiator.jpg
+0021-gladiator-ii,Gladiator II,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0021-gladiator-ii.jpg
+0022-harry-potter-and-the-half-blood-prince,Harry Potter and the Half-Blood Prince,,,1001.15,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0022-harry-potter-and-the-half-blood-prince.jpg
+0023-harry-potter-and-the-prisoner-of-azkaban,Harry Potter and the Prisoner of Azkaban,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0023-harry-potter-and-the-prisoner-of-azkaban.jpg
+0024-harry-potter-and-the-philosopher-s-stone,Harry Potter and the Philosopher's Stone,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0024-harry-potter-and-the-philosopher-s-stone.jpg
+0025-harry-potter-and-the-chamber-of-secrets,Harry Potter and the Chamber of Secrets,,,998.85,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0025-harry-potter-and-the-chamber-of-secrets.jpg
+0026-harry-potter-and-the-goblet-of-fire,Harry Potter and the Goblet of Fire,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0026-harry-potter-and-the-goblet-of-fire.jpg
+0027-harry-potter-and-the-order-of-the-phoenix,Harry Potter and the Order of the Phoenix,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0027-harry-potter-and-the-order-of-the-phoenix.jpg
+0028-harry-potter-and-the-deathly-hallows-part-1,Harry Potter and the Deathly Hallows: Part 1,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0028-harry-potter-and-the-deathly-hallows-part-1.jpg
+0029-harry-potter-and-the-deathly-hallows-part-2,Harry Potter and the Deathly Hallows: Part 2,,,1021.08,3,2,1,C:\Users\Maxsc\VS_projects\random\posters\0029-harry-potter-and-the-deathly-hallows-part-2.jpg
+0030-raiders-of-the-lost-ark,Raiders of the Lost Ark,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0030-raiders-of-the-lost-ark.jpg
+0031-indiana-jones-and-the-temple-of-doom,Indiana Jones and the Temple of Doom,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0031-indiana-jones-and-the-temple-of-doom.jpg
+0032-indiana-jones-and-the-last-crusade,Indiana Jones and the Last Crusade,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0032-indiana-jones-and-the-last-crusade.jpg
+0033-one-battle-after-another,One Battle After Another,,,1018.85,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0033-one-battle-after-another.jpg
+0034-marty-supreme,Marty Supreme,,,998.85,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0034-marty-supreme.jpg
+0035-mad-max-fury-road,Mad Max: Fury Road,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0035-mad-max-fury-road.jpg
+0036-wake-up-dead-man-a-knives-out-mystery,Wake Up Dead Man: A Knives Out Mystery,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0036-wake-up-dead-man-a-knives-out-mystery.jpg
+0037-heretic,Heretic,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0037-heretic.jpg
+0038-the-batman,The Batman,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0038-the-batman.jpg
+0039-ford-v-ferrari,Ford v Ferrari,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0039-ford-v-ferrari.jpg
+0040-gran-turismo,Gran Turismo,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0040-gran-turismo.jpg
+0041-rise-of-the-planet-of-the-apes,Rise of the Planet of the Apes,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0041-rise-of-the-planet-of-the-apes.jpg
+0042-war-for-the-planet-of-the-apes,War for the Planet of the Apes,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0042-war-for-the-planet-of-the-apes.jpg
+0043-get-out,Get Out,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0043-get-out.jpg
+0044-the-revenant,The Revenant,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0044-the-revenant.jpg
+0045-casino-royale,Casino Royale,,,1001.15,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0045-casino-royale.jpg
+0046-the-amazing-spider-man,The Amazing Spider-Man,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0046-the-amazing-spider-man.jpg
+0047-the-amazing-spider-man-2,The Amazing Spider-Man 2,,,961.15,2,0,2,C:\Users\Maxsc\VS_projects\random\posters\0047-the-amazing-spider-man-2.jpg
+0048-spider-man,Spider-Man,,,1020.06,3,2,1,C:\Users\Maxsc\VS_projects\random\posters\0048-spider-man.jpg
+0049-spider-man-2,Spider-Man 2,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0049-spider-man-2.jpg
+0050-men-in-black,Men in Black,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0050-men-in-black.jpg
+0051-men-in-black-ii,Men in Black II,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0051-men-in-black-ii.jpg
+0052-men-in-black-3,Men in Black 3,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0052-men-in-black-3.jpg
+0053-the-accountant-2,The Accountant 2,,,1021.15,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0053-the-accountant-2.jpg
+0054-jurassic-park,Jurassic Park,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0054-jurassic-park.jpg
+0055-the-nightmare-before-christmas,The Nightmare Before Christmas,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0055-the-nightmare-before-christmas.jpg
+0056-die-hard,Die Hard,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0056-die-hard.jpg
+0057-back-to-the-future,Back to the Future,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0057-back-to-the-future.jpg
+0058-back-to-the-future-part-ii,Back to the Future Part II,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0058-back-to-the-future-part-ii.jpg
+0059-back-to-the-future-part-iii,Back to the Future Part III,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0059-back-to-the-future-part-iii.jpg
+0060-dawn-of-the-planet-of-the-apes,Dawn of the Planet of the Apes,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0060-dawn-of-the-planet-of-the-apes.jpg
+0061-spider-man-into-the-spider-verse,Spider-Man: Into the Spider-Verse,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0061-spider-man-into-the-spider-verse.jpg
+0062-spider-man-across-the-spider-verse,Spider-Man: Across the Spider-Verse,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0062-spider-man-across-the-spider-verse.jpg
+0063-spider-man-no-way-home,Spider-Man: No Way Home,,,978.78,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0063-spider-man-no-way-home.jpg
+0064-spider-man-3,Spider-Man 3,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0064-spider-man-3.jpg
+0065-rogue-one-a-star-wars-story,Rogue One: A Star Wars Story,,,978.85,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0065-rogue-one-a-star-wars-story.jpg
+0066-dune-part-one,Dune: Part One,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0066-dune-part-one.jpg
+0067-dune-part-two,Dune: Part Two,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0067-dune-part-two.jpg
+0068-zodiac,Zodiac,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0068-zodiac.jpg
+0069-gone-girl,Gone Girl,,,978.85,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0069-gone-girl.jpg
+0070-skyfall,Skyfall,,,978.85,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0070-skyfall.jpg
+0071-top-gun-maverick,Top Gun: Maverick,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0071-top-gun-maverick.jpg
+0072-us,Us,2019,458723,1018.85,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0072-us.jpg
+0073-nope,Nope,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0073-nope.jpg
+0074-isle-of-dogs,Isle of Dogs,,,982.29,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0074-isle-of-dogs.jpg
+0075-the-wolf-of-wall-street,The Wolf of Wall Street,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0075-the-wolf-of-wall-street.jpg
+0076-now-you-see-me,Now You See Me,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0076-now-you-see-me.jpg
+0077-now-you-see-me-2,Now You See Me 2,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0077-now-you-see-me-2.jpg
+0078-logan,Logan,,,982.23,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0078-logan.jpg
+0079-x-men,X-Men,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0079-x-men.jpg
+0080-x2-x-men-united,X2: X-Men United,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0080-x2-x-men-united.jpg
+0081-x-men-the-last-stand,X-Men: The Last Stand,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0081-x-men-the-last-stand.jpg
+0082-x-men-origins-wolverine,X-Men Origins: Wolverine,,,981.15,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0082-x-men-origins-wolverine.jpg
+0083-x-men-first-class,X-Men: First Class,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0083-x-men-first-class.jpg
+0084-the-wolverine,The Wolverine,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0084-the-wolverine.jpg
+0085-x-men-days-of-future-past,X-Men: Days of Future Past,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0085-x-men-days-of-future-past.jpg
+0086-spider-man-homecoming,Spider-Man: Homecoming,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0086-spider-man-homecoming.jpg
+0087-spider-man-far-from-home,Spider-Man: Far From Home,,,1001.15,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0087-spider-man-far-from-home.jpg
+0088-black-panther,Black Panther,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0088-black-panther.jpg
+0089-black-panther-wakanda-forever,Black Panther: Wakanda Forever,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0089-black-panther-wakanda-forever.jpg
+0090-doctor-strange,Doctor Strange,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0090-doctor-strange.jpg
+0091-doctor-strange-in-the-multiverse-of-madness,Doctor Strange in the Multiverse of Madness,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0091-doctor-strange-in-the-multiverse-of-madness.jpg
+0092-the-avengers,The Avengers,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0092-the-avengers.jpg
+0093-avengers-age-of-ultron,Avengers: Age of Ultron,,,983.23,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0093-avengers-age-of-ultron.jpg
+0094-avengers-infinity-war,Avengers: Infinity War,,,998.85,2,1,1,C:\Users\Maxsc\VS_projects\random\posters\0094-avengers-infinity-war.jpg
+0095-avengers-endgame,Avengers: Endgame,,,961.15,2,0,2,C:\Users\Maxsc\VS_projects\random\posters\0095-avengers-endgame.jpg
+0096-iron-man,Iron Man,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0096-iron-man.jpg
+0097-captain-america-the-first-avenger,Captain America: The First Avenger,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0097-captain-america-the-first-avenger.jpg
+0098-guardians-of-the-galaxy,Guardians of the Galaxy,,,1020.00,1,1,0,C:\Users\Maxsc\VS_projects\random\posters\0098-guardians-of-the-galaxy.jpg
+0099-guardians-of-the-galaxy-vol-2,Guardians of the Galaxy Vol. 2,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0099-guardians-of-the-galaxy-vol-2.jpg
+0100-guardians-of-the-galaxy-vol-3,Guardians of the Galaxy Vol. 3,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0100-guardians-of-the-galaxy-vol-3.jpg
+0101-the-lord-of-the-rings-the-fellowship-of-the-ring,The Lord of the Rings: The Fellowship of the Ring,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0101-the-lord-of-the-rings-the-fellowship-of-the-ring.jpg
+0102-the-lord-of-the-rings-the-two-towers,The Lord of the Rings: The Two Towers,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0102-the-lord-of-the-rings-the-two-towers.jpg
+0103-the-lord-of-the-rings-the-return-of-the-king,The Lord of the Rings: The Return of the King,,,978.85,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0103-the-lord-of-the-rings-the-return-of-the-king.jpg
+0104-mad-max-2,Mad Max 2,,,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0104-mad-max-2.jpg
+0105-ocean-s-eleven,Ocean's Eleven,,,981.22,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0105-ocean-s-eleven.jpg
+0106-bullet-train,Bullet Train,,,1038.85,2,2,0,C:\Users\Maxsc\VS_projects\random\posters\0106-bullet-train.jpg
+0107-everything-everywhere-all-at-once,Everything Everywhere All at Once,,,980.00,1,0,1,C:\Users\Maxsc\VS_projects\random\posters\0107-everything-everywhere-all-at-once.jpg
+0108-hidden-figures,Hidden Figures,,,961.15,2,0,2,C:\Users\Maxsc\VS_projects\random\posters\0108-hidden-figures.jpg
+0109-howl-s-moving-castle,Howl's Moving Castle,2004,4935,1000.00,0,0,0,C:\Users\Maxsc\VS_projects\random\posters\0109-howl-s-moving-castle.jpg

@@ -7,6 +7,7 @@ import os
 import random
 import re
 import threading
+import time
 from collections import deque
 from dataclasses import dataclass
 from io import BytesIO
@@ -245,13 +246,25 @@ class MovieStore:
 
     def save(self) -> None:
         with self._lock:
-            temp_path = self.csv_path.with_suffix(".tmp")
+            temp_path = self.csv_path.with_name(
+                f"{self.csv_path.stem}.{threading.get_ident()}.tmp"
+            )
             with temp_path.open("w", encoding="utf-8", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=self.fieldnames)
                 writer.writeheader()
                 for movie in self.movies:
                     writer.writerow(movie.to_row())
-            os.replace(temp_path, self.csv_path)
+
+            retry_delays = (0, 0.05, 0.1, 0.2, 0.4, 0.8)
+            for attempt, delay in enumerate(retry_delays):
+                if delay:
+                    time.sleep(delay)
+                try:
+                    os.replace(temp_path, self.csv_path)
+                    return
+                except PermissionError:
+                    if attempt == len(retry_delays) - 1:
+                        raise
 
     def by_id(self, movie_id: str) -> Movie:
         with self._lock:
@@ -264,20 +277,24 @@ class MovieStore:
         with self._lock:
             return sorted(self.movies, key=lambda movie: movie.elo_rating, reverse=True)
 
-    def update_poster_path(self, movie_id: str, poster_path: Path) -> None:
+    def update_poster_path(
+        self, movie_id: str, poster_path: Path, persist: bool = True
+    ) -> None:
         with self._lock:
             self.by_id(movie_id).poster_local_path = str(poster_path)
-            self.save()
+            if persist:
+                self.save()
 
     def update_poster_details(
-        self, movie_id: str, poster_path: Path, tmdb_id: str
+        self, movie_id: str, poster_path: Path, tmdb_id: str, persist: bool = True
     ) -> None:
         with self._lock:
             movie = self.by_id(movie_id)
             movie.poster_local_path = str(poster_path)
             if tmdb_id:
                 movie.tmdb_id = tmdb_id
-            self.save()
+            if persist:
+                self.save()
 
     def rating_snapshots(self, movie_ids: tuple[str, str]) -> list[dict[str, object]]:
         with self._lock:
@@ -549,6 +566,7 @@ class PosterService:
         movies = list(self.store.movies)
         total = len(movies)
         cached_count = 0
+        poster_metadata_changed = False
 
         for completed, movie in enumerate(movies, start=1):
             with self._lock:
@@ -565,7 +583,8 @@ class PosterService:
                 local_path = None
             if local_path is None and expected_path.is_file():
                 local_path = expected_path
-                self.store.update_poster_path(movie.id, expected_path)
+                self.store.update_poster_path(movie.id, expected_path, persist=False)
+                poster_metadata_changed = True
 
             if local_path:
                 try:
@@ -604,13 +623,24 @@ class PosterService:
                     if image:
                         with self._lock:
                             self._image_cache[movie.id] = image
-                        self.store.update_poster_details(movie.id, poster_path, tmdb_id)
+                        self.store.update_poster_details(
+                            movie.id, poster_path, tmdb_id, persist=False
+                        )
+                        poster_metadata_changed = True
                         on_loaded(movie.id, image)
                         cached_count += 1
             finally:
                 with self._lock:
                     self._in_flight.discard(movie.id)
                 on_progress(completed, total, cached_count)
+
+        if poster_metadata_changed:
+            try:
+                self.store.save()
+            except PermissionError:
+                # A later normal save can persist these cache paths; the poster files
+                # remain available through their predictable filenames.
+                pass
 
     def _fallback_for(self, movie: Movie) -> Image.Image:
         with self._lock:
