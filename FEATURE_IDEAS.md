@@ -105,6 +105,50 @@ most important ranking and data-management needs first.
 - [ ] Put movie metadata and poster retrieval behind a provider adapter so the application is not structurally tied to TMDB.
 - [ ] Research licensed, open, public-domain, user-supplied, and paid artwork options; avoid bulk scraping or mirroring a third-party poster catalog.
 - [ ] Define a first-class stable item model now: local item ID, external provider IDs, title, year, and media provenance. It can later support movies, books, games, music, and other pairwise-ranked domains.
+
+## Momentum And Re-evaluation
+
+- [ ] Add a rolling momentum signal based on recent unexpected Elo gains or losses, not simply consecutive wins. A new movie that beats stronger nearby movies can earn a temporary upward challenge path; a falling movie can receive a downward one.
+- [ ] Momentum should expand the normal Elo window selectively toward stronger or weaker opponents, then fade once the movie starts producing ordinary expected results and re-settles.
+- [ ] Add exposure guardrails: cooldowns, opponent diversity, and a short-window repeat limit so a rising or falling movie is not shown over and over.
+- [ ] Slightly increase the chance of a momentum matchup, but do not let it dominate the arena queue or starve the rest of the roster.
+- [ ] Make re-evaluation explicit in the movie detail view: show that a movie is moving quickly because recent results conflict with its established rating.
+
+## Graphs And Persistent History
+
+- [ ] Use chronological time as the default graph axis, shared across every selected movie.
+- [ ] Compress only globally inactive intervals with an explicitly marked broken-time segment such as "6 days with no votes"; never compress an interval containing any matchup event. This keeps cross-movie graphs aligned without wasting space on inactivity.
+- [ ] Allow a matchup-count axis as an optional diagnostic view, while keeping time as the comparison-friendly default.
+- [ ] Preserve compact matchup events permanently. Each event should contain only the participants, selected winner or tie, Elo/rank before and after, algorithm version, and timestamp.
+- [ ] Build graph tooltips and movie logs from those events rather than storing repeated full-leaderboard snapshots.
+
+## Rating Tiers And Algorithm Releases
+
+- [ ] Keep ordinal rank (number 1, number 2, and so on) separate from optional presentation tiers. Elo orders the current roster; a badge should never obscure that exact order.
+- [ ] Do not force a fixed percentage of movies into Bronze, Platinum, or Supersonic Legend. A personal list of favorites may honestly contain no low-tier movie or many high-tier movies.
+- [ ] For personal rankings, prefer user-local descriptive bands or configurable fixed thresholds, and label them as personal rather than universal competitive skill tiers.
+- [ ] Reserve globally calibrated competitive-style tiers for a future shared pool with enough cross-user data, stable thresholds, and published methodology.
+- [ ] For a ranking-algorithm release, support three migration modes: continue with current Elo going forward, replay the saved matchup events under the new algorithm, or start a clearly labeled new season seeded from prior ratings rather than flat-resetting every movie.
+- [ ] Version tier thresholds and ranking rules alongside matchup events so charts and historical explanations remain interpretable after patches.
+
+## Local Profiles And Portable Data
+
+- [ ] Create a local profile on first startup, with its own movie list, leaderboard, matchup events, posters, and settings stored outside the code repository and ignored by Git.
+- [ ] Seed new profiles from an optional default movie list, then let each person diverge completely.
+- [ ] Use an explicit profile chooser or local profile name, not computer fingerprinting. Hardware identity is fragile, confusing on shared devices, and a poor foundation for future sign-in.
+- [ ] Later, link an authenticated account to a profile for backup and cross-device sync without mixing personal leaderboards by accident.
+- [ ] Add profile export/import so a person can move their list between computers without publishing private rankings.
+
+## Global Ranking Confidence
+
+- [ ] Give every global movie a coverage report: number of distinct users, number of distinct opponent relationships, genre/franchise diversity, and uncertainty.
+- [ ] Treat repeated choices of the same pair by one person as revisions or sharply decayed evidence, not unlimited additional wins and losses.
+- [ ] Cap each person's total global influence before considering diversity. Do not simply reward people with broad portfolios by giving them unlimited voting power.
+- [ ] Down-weight narrow comparison islands for a general global ranking while preserving them as valid signals in genre, franchise, or community-specific rankings.
+- [ ] Detect bridge movies and bridge users that connect otherwise separate taste clusters; these comparisons are especially valuable for estimating a coherent broader ranking.
+- [ ] Publish confidence beside any global position so a highly rated movie with mostly superhero-only exposure is visibly less certain than one tested across many audiences and opponent types.
+- [ ] maybe the more comparisions and movies a users movie subset has gives it more weight, but with diminishing return. 
+
 ## Social And Fun
 
 - [ ] Share a read-only ranking page or export a polished image of the top 10.
