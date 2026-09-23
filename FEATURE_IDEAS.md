@@ -49,6 +49,13 @@ repetitive or forcing a brittle one-match rank override.
   temporary downward challenge path.
 - Selectively widen and shift its opponent window in the correct direction: a rising
   movie gets mostly-higher challenges, while a falling movie gets mostly-lower ones.
+- Add cooldowns, opponent diversity, and short-window repeat limits so the same movie
+  does not appear too often.
+- Slightly increase momentum-match likelihood without starving the rest of the roster.
+- Fade the boost when outcomes become ordinary and the movie re-settles.
+- Show in the movie detail view that a rating is moving quickly because recent
+  preferences conflict with its established position.
+
 ### Historical Schedule Re-evaluation
 
 **Goal:** Correct the opportunity to prove a movie's placement when early pairings turn
@@ -76,13 +83,6 @@ free Elo or making permanent complexity out of a warm-up problem.
   the total policy deliberately small and explainable.
 - Use simulations to verify that this intervention improves recovery and does not
   create persistent bias, over-scheduling, or a system that cannot eventually settle.
-- Add cooldowns, opponent diversity, and short-window repeat limits so the same movie
-  does not appear too often.
-- Slightly increase momentum-match likelihood without starving the rest of the roster.
-- Fade the boost when outcomes become ordinary and the movie re-settles.
-- Show in the movie detail view that a rating is moving quickly because recent
-  preferences conflict with its established position.
-
 ### Rating-Engine Stability And Simulation
 
 **Goal:** Tune rating changes and matchmaking from measurable behavior rather than

@@ -196,6 +196,10 @@ class MovieStore:
                 changed = True
             if spec.tmdb_id and movie.tmdb_id != spec.tmdb_id:
                 movie.tmdb_id = spec.tmdb_id
+                cached_path = POSTER_DIR / f"{movie.id}.jpg"
+                if cached_path.is_file():
+                    cached_path.unlink()
+                movie.poster_local_path = ""
                 changed = True
         return changed
 
@@ -261,6 +265,7 @@ class MovieStore:
                     time.sleep(delay)
                 try:
                     os.replace(temp_path, self.csv_path)
+                    self._write_movies_txt()
                     return
                 except PermissionError:
                     if attempt == len(retry_delays) - 1:
@@ -586,7 +591,7 @@ class PosterService:
                 self.store.update_poster_path(movie.id, expected_path, persist=False)
                 poster_metadata_changed = True
 
-            if local_path:
+            if local_path and movie.tmdb_id:
                 try:
                     image = load_poster(local_path)
                 except OSError:
@@ -627,6 +632,16 @@ class PosterService:
                             movie.id, poster_path, tmdb_id, persist=False
                         )
                         poster_metadata_changed = True
+                        on_loaded(movie.id, image)
+                        cached_count += 1
+                elif local_path:
+                    try:
+                        image = load_poster(local_path)
+                    except OSError:
+                        image = None
+                    if image:
+                        with self._lock:
+                            self._image_cache[movie.id] = image
                         on_loaded(movie.id, image)
                         cached_count += 1
             finally:
@@ -718,7 +733,21 @@ class PosterService:
             )
             response.raise_for_status()
             results = response.json().get("results", [])
-            result = next((item for item in results if item.get("poster_path")), None)
+            normalized_title = normalize_movie_title(movie.title)
+            exact_results = [
+                item
+                for item in results
+                if item.get("poster_path")
+                and normalize_movie_title(
+                    item.get("title") or item.get("original_title") or ""
+                )
+                == normalized_title
+                and (
+                    not movie.release_year
+                    or (item.get("release_date") or "")[:4] == movie.release_year
+                )
+            ]
+            result = exact_results[0] if len(exact_results) == 1 else None
 
         if not result:
             return None, ""
@@ -1430,6 +1459,9 @@ def k_factor(matches_played: int) -> int:
 def pair_key(first_id: str, second_id: str) -> tuple[str, str]:
     return tuple(sorted((first_id, second_id)))
 
+
+def normalize_movie_title(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", value.lower())
 
 def slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
