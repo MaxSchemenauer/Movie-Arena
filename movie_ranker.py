@@ -29,7 +29,8 @@ HISTORY_PATH = APP_DIR / "ranking_history.json"
 STARTING_ELO = 1000.0
 POSTER_SIZE = (360, 540)
 SEARCH_POSTER_SIZE = (74, 111)
-RECENT_PAIR_LIMIT = 160
+PLACEMENT_MATCH_TARGET = 3
+RECENT_MOVIE_LIMIT = 8
 NORMAL_MATCHUP_ELO_WINDOW = 100.0
 
 
@@ -399,7 +400,7 @@ class Matchmaker:
     def __init__(self, store: MovieStore) -> None:
         self.store = store
         self.session_pairs: set[tuple[str, str]] = set()
-        self.recent_pairs: deque[tuple[str, str]] = deque(maxlen=RECENT_PAIR_LIMIT)
+        self.recent_movie_ids: deque[str] = deque(maxlen=RECENT_MOVIE_LIMIT)
 
     def next_pair(self, eligible_ids: set[str] | None = None) -> tuple[Movie, Movie]:
         movies = list(self.store.movies)
@@ -408,84 +409,119 @@ class Matchmaker:
         if len(movies) < 2:
             raise ValueError("At least two movies are required.")
 
-        pair = self._calibration_pair(movies) or self._crucible_pair(movies)
+        pair = self._calibration_pair(movies) or self._coverage_pair(movies)
         self._remember_pair(pair[0].id, pair[1].id)
         return pair
 
     def _calibration_pair(self, movies: list[Movie]) -> tuple[Movie, Movie] | None:
-        candidates = [movie for movie in movies if movie.matches_played < 3]
-        if not candidates:
+        unfinished = [
+            movie
+            for movie in movies
+            if movie.matches_played < PLACEMENT_MATCH_TARGET
+        ]
+        if not unfinished:
             return None
 
-        candidates.sort(key=lambda movie: (movie.matches_played, random.random()))
-        movie_a = candidates[0]
-        possible = [movie for movie in movies if movie.id != movie_a.id]
-        random.shuffle(possible)
-        unseen = [movie for movie in possible if not self._has_seen(movie_a.id, movie.id)]
-        movie_b = (unseen or possible)[0]
-        return movie_a, movie_b
+        lowest_count = min(movie.matches_played for movie in unfinished)
+        first_pool = [
+            movie for movie in unfinished if movie.matches_played == lowest_count
+        ]
+        first = self._choose_movie(first_pool, prefer_not_recent=True)
 
-    def _crucible_pair(self, movies: list[Movie]) -> tuple[Movie, Movie]:
-        nearby_pairs = self._nearby_unseen_pairs(movies)
-        if not nearby_pairs:
-            # Repeat a close pairing before widening the window for a long session.
-            self.session_pairs.clear()
-            nearby_pairs = self._nearby_unseen_pairs(movies)
-
-        if nearby_pairs:
-            anchors = {movie.id: movie for pair in nearby_pairs for movie in pair}
-            movie_a = self._weighted_middle_movie(list(anchors.values()))
-            rivals = [
-                second if first.id == movie_a.id else first
-                for first, second in nearby_pairs
-                if first.id == movie_a.id or second.id == movie_a.id
+        second_pool = [
+            movie
+            for movie in unfinished
+            if movie.id != first.id and movie.matches_played == lowest_count
+        ]
+        if not second_pool:
+            remaining = [movie for movie in movies if movie.id != first.id]
+            next_count = min(movie.matches_played for movie in remaining)
+            second_pool = [
+                movie
+                for movie in remaining
+                if movie.matches_played == next_count
             ]
-            movie_b = min(
-                rivals,
-                key=lambda movie: abs(movie.elo_rating - movie_a.elo_rating),
-            )
-            return movie_a, movie_b
 
-        # A sparse leaderboard can have no pair within the window at all. In that
-        # exceptional case, use its least-mismatched pair so ranking can continue.
-        return min(
-            (
-                (movies[first_index], movies[second_index])
-                for first_index in range(len(movies) - 1)
-                for second_index in range(first_index + 1, len(movies))
-            ),
-            key=lambda pair: abs(pair[0].elo_rating - pair[1].elo_rating),
-        )
+        second = self._choose_opponent(first, second_pool, prefer_not_recent=True)
+        return first, second
 
-    def _nearby_unseen_pairs(self, movies: list[Movie]) -> list[tuple[Movie, Movie]]:
+    def _coverage_pair(self, movies: list[Movie]) -> tuple[Movie, Movie]:
+        anchor = self._choose_coverage_anchor(movies)
+        rivals = self._nearby_rivals(anchor, movies)
+
+        if not rivals:
+            # A long session can exhaust local unseen pairs. Allow a repeat before
+            # widening the rating window, preserving local comparison quality.
+            self.session_pairs.clear()
+            rivals = self._nearby_rivals(anchor, movies)
+
+        if not rivals:
+            rivals = [
+                movie
+                for movie in movies
+                if movie.id != anchor.id and not self._has_seen(anchor.id, movie.id)
+            ]
+        if not rivals:
+            self.session_pairs.clear()
+            rivals = [movie for movie in movies if movie.id != anchor.id]
+
+        return anchor, self._choose_coverage_rival(anchor, rivals)
+
+    def _choose_coverage_anchor(self, movies: list[Movie]) -> Movie:
+        minimum_matches = min(movie.matches_played for movie in movies)
+        least_exposed = [
+            movie for movie in movies if movie.matches_played == minimum_matches
+        ]
+        return self._choose_movie(least_exposed, prefer_not_recent=True)
+
+    def _nearby_rivals(self, anchor: Movie, movies: list[Movie]) -> list[Movie]:
         return [
-            (first, second)
-            for first_index, first in enumerate(movies[:-1])
-            for second in movies[first_index + 1 :]
-            if abs(first.elo_rating - second.elo_rating) <= NORMAL_MATCHUP_ELO_WINDOW
-            and not self._has_seen(first.id, second.id)
+            movie
+            for movie in movies
+            if movie.id != anchor.id
+            and abs(movie.elo_rating - anchor.elo_rating) <= NORMAL_MATCHUP_ELO_WINDOW
+            and not self._has_seen(anchor.id, movie.id)
         ]
 
-    def _weighted_middle_movie(self, movies: list[Movie]) -> Movie:
-        ranked = sorted(movies, key=lambda movie: movie.elo_rating)
-        if len(ranked) == 1:
-            return ranked[0]
-
+    def _choose_coverage_rival(self, anchor: Movie, rivals: list[Movie]) -> Movie:
+        candidates = self._without_recent(rivals)
+        minimum_matches = min(movie.matches_played for movie in candidates)
         weights = []
-        for index, _movie in enumerate(ranked):
-            percentile = index / (len(ranked) - 1)
-            middle_bias = 1.0 - abs(percentile - 0.5)
-            weights.append(0.2 + middle_bias)
-        return random.choices(ranked, weights=weights, k=1)[0]
+        for movie in candidates:
+            elo_distance = abs(movie.elo_rating - anchor.elo_rating)
+            closeness = 1 - (elo_distance / NORMAL_MATCHUP_ELO_WINDOW)
+            coverage = 1 / (1 + max(0, movie.matches_played - minimum_matches))
+            weights.append((0.2 + closeness) * coverage)
+        return random.choices(candidates, weights=weights, k=1)[0]
+
+    def _choose_movie(
+        self, candidates: list[Movie], *, prefer_not_recent: bool
+    ) -> Movie:
+        choices = self._without_recent(candidates) if prefer_not_recent else candidates
+        return random.choice(choices)
+
+    def _choose_opponent(
+        self, anchor: Movie, candidates: list[Movie], *, prefer_not_recent: bool
+    ) -> Movie:
+        unseen = [
+            movie for movie in candidates if not self._has_seen(anchor.id, movie.id)
+        ]
+        choices = unseen or candidates
+        if prefer_not_recent:
+            choices = self._without_recent(choices)
+        return random.choice(choices)
+
+    def _without_recent(self, movies: list[Movie]) -> list[Movie]:
+        recent_ids = set(self.recent_movie_ids)
+        fresh = [movie for movie in movies if movie.id not in recent_ids]
+        return fresh or movies
 
     def _remember_pair(self, first_id: str, second_id: str) -> None:
-        pair = pair_key(first_id, second_id)
-        self.session_pairs.add(pair)
-        self.recent_pairs.append(pair)
+        self.session_pairs.add(pair_key(first_id, second_id))
+        self.recent_movie_ids.extend((first_id, second_id))
 
     def _has_seen(self, first_id: str, second_id: str) -> bool:
         return pair_key(first_id, second_id) in self.session_pairs
-
 
 class PosterService:
     def __init__(self, store: MovieStore, api_key: str) -> None:
